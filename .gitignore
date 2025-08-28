@@ -1,0 +1,33 @@
+# .gitignore
+*.tfstate
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+
+# Terraform provider binaries
+*.exe
+*.zip
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Sensitive files
+*.tfvars
+*.tfvars.json
+
+# Ignore plan files
+*.plan
+
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+crash.log

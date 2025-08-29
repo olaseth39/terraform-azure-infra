@@ -21,12 +21,17 @@ location = local.location
 
 
 module "network" {
-source = "../../modules/networking"
-name = "${local.prefix}-vnet"
-location = local.location
-rg_name = azurerm_resource_group.rg.name
-}
+  source  = "../../modules/networking"
+  name    = "${local.prefix}-vnet"
+  location = local.location
+  rg_name  = azurerm_resource_group.rg.name
+  address_space = ["10.0.0.0/16"]
 
+  subnets = {
+    web     = { address_prefix = "10.0.1.0/24" }
+    backend = { address_prefix = "10.0.2.0/24" }
+  }
+}
 
 module "compute" {
   source = "../../modules/compute"
@@ -47,7 +52,7 @@ module "compute" {
   autoscale_max            = 10
   cpu_scale_out_threshold  = 70   # scale out if avg CPU > 70%
   cpu_scale_in_threshold   = 30   # scale in if avg CPU < 30%
-  scale_cooldown           = 5    # 5 minutes before another scale event
+  scale_cooldown           = "PT5M"    # 5 minutes before another scale event
 }
 
 
